@@ -18,8 +18,7 @@ public class JoueurScript : MonoBehaviour
 
     void Start()
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        
+       
     }
 
     // Update is called once per frame
@@ -55,10 +54,17 @@ public class JoueurScript : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Oui, tu rentres en collision");
         if(collision.gameObject.tag == "Sol")
         {
             Debug.Log("Je touche le sol !");
+        }
+        if(collision.gameObject.tag == "Tronc")
+        {
+            Debug.Log("Je touche le tronc");
+        }
+        if(collision.gameObject.tag == "Lave")
+        {
+            Debug.Log("Meurt DémonGorgon");
         }
     }
 
