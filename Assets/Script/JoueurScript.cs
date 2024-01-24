@@ -13,17 +13,19 @@ public class JoueurScript : MonoBehaviour
     public float tempsAttente;
     public float tempsAttenteNecessaire;
 
-    //Collider
-    public GameObject SolBase;
+    public bool grenouillePerche;   //pour savoir si la granouille est sur un sol ou une plateforme
+
+    public Vector2 spawnDuJeu;
 
     void Start()
     {
-       
+        spawnDuJeu = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         tempsAttente += Time.deltaTime;
 
         if(Input.GetKeyDown(KeyCode.LeftArrow) && tempsAttente > tempsAttenteNecessaire)
@@ -50,22 +52,47 @@ public class JoueurScript : MonoBehaviour
 
         }
 
+        if(grenouillePerche == false)
+        {
+            Debug.Log("Je mourru");
+            
+        }
+
+
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Sol")
-        {
-            Debug.Log("Je touche le sol !");
-        }
         if(collision.gameObject.tag == "Tronc")
         {
-            Debug.Log("Je touche le tronc");
+            Debug.Log("Je suis sur une plateforme hoho");
+            transform.position = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y, 0);
+            transform.SetParent(collision.transform);
+            grenouillePerche = true;
         }
-        if(collision.gameObject.tag == "Lave")
+        if(collision.gameObject.tag == "Sol")
         {
-            Debug.Log("Meurt DémonGorgon");
+            grenouillePerche = true;
         }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Tronc")
+        {
+            Debug.Log("Je suis plus sur une plateforme haha");
+            transform.SetParent(null);
+            grenouillePerche = false;
+        }
+        if (collision.gameObject.tag == "Sol")
+        {
+            grenouillePerche = false;
+        }
+    }
+
+    public void MortDuJoueur()
+    {
+        transform.position = spawnDuJeu;
     }
 
 }
