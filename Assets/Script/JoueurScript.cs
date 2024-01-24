@@ -15,40 +15,38 @@ public class JoueurScript : MonoBehaviour
 
     public bool grenouillePerche;   //pour savoir si la granouille est sur un sol ou une plateforme
 
+    public GameObject canvaFin;
+    public GameObject canvaTuto;
+
     public Vector2 spawnDuJeu;
 
     void Start()
     {
         spawnDuJeu = transform.position;
+        canvaFin.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        tempsAttente += Time.deltaTime;
-
-        if(Input.GetKeyDown(KeyCode.LeftArrow) && tempsAttente > tempsAttenteNecessaire)
+        if(Input.GetKey(KeyCode.LeftArrow))
         {
             transform.position += Vector3.left * vitesse;
-            tempsAttente = 0;
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow) && tempsAttente > tempsAttenteNecessaire)
+        if (Input.GetKey(KeyCode.RightArrow) )
         {
             transform.position += Vector3.right * vitesse;
-            tempsAttente = 0;
 
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow) && tempsAttente > tempsAttenteNecessaire)
+        if (Input.GetKey(KeyCode.UpArrow) )
         {
             transform.position += Vector3.up * vitesse;
-            tempsAttente = 0;
 
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow) && tempsAttente > tempsAttenteNecessaire)
+        if (Input.GetKey(KeyCode.DownArrow) )
         {
             transform.position += Vector3.down * vitesse;
-            tempsAttente = 0;
 
         }
         //a activer pour jouer au froggers de base
@@ -62,14 +60,23 @@ public class JoueurScript : MonoBehaviour
 
     }
     //a désactiver pour jouer au froggers de base
-    public void OnTriggerExit2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Plateforme")
         {
             Debug.Log("Perdue");
             MortDuJoueur();
         }
+        if(collision.gameObject.tag == "Fin")
+        {
+            canvaFin.SetActive(true);
+        }
 
+    }
+
+    public void FermerTuto()
+    {
+        Destroy(canvaTuto);
     }
 
         //A activer pour jouer au froggers normale
