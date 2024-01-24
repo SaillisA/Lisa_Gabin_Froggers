@@ -7,6 +7,8 @@ TagManager:
   - Sol
   - Tronc
   - Lave
+  - Plateforme
+  - Fin
   layers:
   - Default
   - TransparentFX

@@ -51,46 +51,58 @@ public class JoueurScript : MonoBehaviour
             tempsAttente = 0;
 
         }
-
+        //a activer pour jouer au froggers de base
+        /*
         if(grenouillePerche == false)
         {
             Debug.Log("Je mourru");
             
-        }
+        }*/
 
 
     }
-
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag == "Tronc")
-        {
-            Debug.Log("Je suis sur une plateforme hoho");
-            transform.position = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y, 0);
-            transform.SetParent(collision.transform);
-            grenouillePerche = true;
-        }
-        if(collision.gameObject.tag == "Sol")
-        {
-            grenouillePerche = true;
-        }
-    }
-
+    //a désactiver pour jouer au froggers de base
     public void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Tronc")
+        if (collision.gameObject.tag == "Plateforme")
         {
-            Debug.Log("Je suis plus sur une plateforme haha");
-            transform.SetParent(null);
-            grenouillePerche = false;
+            Debug.Log("Perdue");
+            MortDuJoueur();
         }
-        if (collision.gameObject.tag == "Sol")
-        {
-            grenouillePerche = false;
-        }
+
     }
 
-    public void MortDuJoueur()
+        //A activer pour jouer au froggers normale
+        /*public void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(collision.gameObject.tag == "Plateforme")
+            {
+                Debug.Log("Je suis sur une plateforme hoho");
+                transform.position = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y, 0);
+                transform.SetParent(collision.transform);
+                grenouillePerche = true;
+            }
+            if(collision.gameObject.tag == "Sol")
+            {
+                grenouillePerche = true;
+            }
+        }
+
+        public void OnTriggerExit2D(Collider2D collision)
+        {
+            if(collision.gameObject.tag == "Plateforme")
+            {
+                Debug.Log("Je suis plus sur une plateforme haha");
+                transform.SetParent(null);
+                grenouillePerche = false;
+            }
+            if (collision.gameObject.tag == "Sol")
+            {
+                grenouillePerche = false;
+            }
+        }*/
+
+        public void MortDuJoueur()
     {
         transform.position = spawnDuJeu;
     }
