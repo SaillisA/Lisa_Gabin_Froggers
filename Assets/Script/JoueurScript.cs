@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class JoueurScript : MonoBehaviour
@@ -109,7 +108,7 @@ public class JoueurScript : MonoBehaviour
             }
         }*/
 
-        public void MortDuJoueur()
+    public void MortDuJoueur()
     {
         transform.position = spawnDuJeu;
     }
